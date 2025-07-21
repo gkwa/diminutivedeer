@@ -1,0 +1,25 @@
+[project]
+name = "diminutivedeer"
+version = "0.1.0"
+description = "Document indexing and embedding system with ChromaDB"
+readme = "README.md"
+authors = [
+    { name = "Taylor Monacelli", email = "taylormonacelli@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "chromadb>=0.4.0,<0.6.0",
+    "openai>=1.0.0,<2.0.0",
+    "anthropic>=0.25.0,<1.0.0",
+    "pytest>=7.0.0",
+]
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+[project.scripts]
+diminutivedeer = "diminutivedeer.main:main"
+[build-system]
+requires = ["uv_build>=0.8.0,<0.9"]
+build-backend = "uv_build"

@@ -1,0 +1,28 @@
+services:
+  diminutivedeer:
+    build: .
+    volumes:
+      - ./docs:/app/docs:ro
+      - ./docs2:/app/docs2:ro
+      - ./chroma_db:/app/chroma_db
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    command: diminutivedeer index /app/docs /app/docs2 --provider mock --db-path /app/chroma_db
+
+  dev:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    command: bash
+    stdin_open: true
+    tty: true
+
+  test:
+    build: .
+    volumes:
+      - .:/app
+    command: python -m pytest tests/ -v
