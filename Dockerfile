@@ -26,11 +26,10 @@ COPY README.md ./
 COPY src/diminutivedeer ./src/diminutivedeer
 COPY tests/ ./tests/
 
-# Quick install of just our package in development mode
+# Install the project and all dependencies
 RUN uv sync --frozen
 
-# Create entrypoint script
-RUN echo '#!/bin/bash\nexec uv run "$@"' > /entrypoint.sh && chmod +x /entrypoint.sh
+# Make the virtual environment the default Python environment
+ENV PATH="/app/.venv/bin:$PATH"
 
-ENTRYPOINT ["/entrypoint.sh"]
 CMD ["diminutivedeer"]
